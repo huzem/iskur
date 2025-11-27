@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Üniversite Raporları</title>
+    <style>
+        /* Genel ayarlar */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .link-button {
+            text-decoration: none;
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.1em;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .link-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Renkler fakülteye göre */
+        .saglik { background-color: #27ae60; }
+        .muhendislik { background-color: #2980b9; }
+        .guzel-sanatlar { background-color: #8e44ad; }
+        .iktisad { background-color: #f39c12; }
+        .fen-edebiyat { background-color: #16a085; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .link-button {
+                font-size: 1em;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Üniversite Raporları</h1>
+    </header>
+
+    <div class="links">
+        <a href="https://www.canva.com/design/DAG537TLWD0/eGVxiXdcnum31wps9BFz4g/edit?utm_content=DAG537TLWD0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button saglik" target="_blank">Sağlık Bilimleri Fakültesi Rapor</a>
+
+        <a href="https://www.canva.com/design/DAG53zepSA8/MFd98lU1c8kl-2Hz3b-A2A/edit?utm_content=DAG53zepSA8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button muhendislik" target="_blank">Mühendislik Fakültesi Rapor</a>
+
+        <a href="https://www.canva.com/design/DAG531su9lQ/dUkRHN39P_tE-55MMJ1NBw/edit?utm_content=DAG531su9lQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button guzel-sanatlar" target="_blank">Güzel Sanatlar Fakültesi Rapor</a>
+
+        <a href="https://www.canva.com/design/DAG53_wgXps/CCrx3QL_mItM1Jczy5zgdw/edit?utm_content=DAG53_wgXps&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button iktisad" target="_blank">İktisadi ve İdari Bilimler Fakültesi Rapor</a>
+
+        <a href="https://www.canva.com/design/DAG53_UrVLk/dLtD1bNs9FUEigC8_GPNJw/edit?utm_content=DAG53_UrVLk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button fen-edebiyat" target="_blank">Fen Edebiyat Fakültesi Rapor</a>
+    </div>
+
+</body>
+</html>
