@@ -3,92 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Üniversite Raporları</title>
+    <title>Üniversite Portalı</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
-        /* Genel ayarlar */
+        /* Genel Ayarlar */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f7f7f7;
+            background-color: #f4f7f6; /* Açık gri fon */
             color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
             margin: 0;
+            padding-top: 60px; /* Navbar'a yer açmak için */
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
         }
 
         header {
             text-align: center;
             margin-bottom: 40px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
         header h1 {
-            font-size: 2.5em;
-            margin: 0;
+            font-size: 2.2em;
             color: #2c3e50;
+            margin: 0;
         }
 
-        .links {
+        header p {
+            color: #7f8c8d;
+        }
+
+        section {
+            margin-bottom: 50px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        section h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* Navigasyon Çubuğu (Navbar) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2c3e50; /* Koyu Mavi */
+            color: white;
+            padding: 10px 20px;
+            position: fixed; /* Üstte sabit kalması için */
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+            font-size: 1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: #3498db; /* Açık Mavi */
+        }
+
+        /* Dropdown Menü (PD Kılavuz Hazırlama) */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 1em;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown-btn:hover {
+            background-color: #3498db;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #34495e; /* Koyu alt menü fonu */
+            min-width: 200px;
+            box-shadow: 0 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            top: 100%; /* Butonun hemen altında başlar */
+            left: 0;
+            border-radius: 4px;
+        }
+
+        .dropdown:hover .dropdown-content {
             display: flex;
             flex-direction: column;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #2c3e50;
+        }
+        
+        /* Rapor Linkleri Stilleri */
+        .links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            width: 100%;
-            max-width: 500px;
+            margin-top: 20px;
         }
 
         .link-button {
             text-decoration: none;
-            background-color: #3498db;
             color: white;
             padding: 15px;
             border-radius: 8px;
             text-align: center;
-            font-size: 1.1em;
-            transition: background 0.3s, transform 0.2s;
+            font-size: 1.05em;
+            font-weight: 500;
+            transition: opacity 0.3s, transform 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .link-button:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
+            opacity: 0.9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.15);
         }
 
-        /* Renkler fakülteye göre */
-        .saglik { background-color: #27ae60; }
-        .muhendislik { background-color: #2980b9; }
-        .guzel-sanatlar { background-color: #8e44ad; }
-        .iktisad { background-color: #f39c12; }
-        .fen-edebiyat { background-color: #16a085; }
+        /* Fakülte Renkleri (Orijinal Koddan Alınmıştır) */
+        .saglik { background-color: #27ae60; } /* Yeşil */
+        .muhendislik { background-color: #2980b9; } /* Mavi */
+        .guzel-sanatlar { background-color: #8e44ad; } /* Mor */
+        .iktisad { background-color: #f39c12; } /* Turuncu */
+        .fen-edebiyat { background-color: #16a085; } /* Turkuaz */
+        
+        /* Alt Bilgi (Footer) */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            font-size: 0.9em;
+        }
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 2em;
+        /* Responsive Tasarım */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
             }
 
-            .link-button {
-                font-size: 1em;
-                padding: 12px;
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 10px;
+                gap: 0;
+            }
+
+            .nav-item, .dropdown-btn {
+                width: 100%;
+                text-align: left;
+                padding: 10px 0;
+            }
+            
+            .dropdown {
+                width: 100%;
+            }
+            
+            .dropdown-content {
+                position: static; /* Mobil'de açılır menüyü normal akışa alır */
+                min-width: 100%;
+            }
+
+            .links {
+                grid-template-columns: 1fr; /* Mobil'de tek sütun */
+            }
+            
+            body {
+                padding-top: 150px; /* Navbar'a daha fazla yer açmak için */
             }
         }
     </style>
-</head>
+    </head>
 <body>
 
-    <header>
-        <h1>Üniversite Raporları</h1>
-    </header>
+    <nav class="navbar">
+        <a href="#" class="logo">HUZEM İŞKUR</a>
+        <div class="nav-links">
+            <a href="#" class="nav-item active"><i class="fas fa-home"></i> Ana Sayfa</a>
+            
+            
+            <div class="dropdown">
+                <button class="nav-item dropdown-btn"><i class="fas fa-file-alt"></i> 1 <i class="fas fa-caret-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="#pd-kilavuz-raporlar">Rapor Linkleri</a>
+                    <a href="#">Yeni Alt Menü 1</a>
+                    
+                </div>
+            </div>
+            
+            <a href="#" class="nav-item"><i class="fas fa-book"></i> 2</a>
+            <a href="#" class="nav-item"><i class="fas fa-users"></i> 3</a>
+        </div>
+    </nav>
 
-    <div class="links">
-        <a href="https://www.canva.com/design/DAG537TLWD0/eGVxiXdcnum31wps9BFz4g/edit?utm_content=DAG537TLWD0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button saglik" target="_blank">Sağlık Bilimleri Fakültesi Rapor</a>
+    <div class="container">
+        
+        <header>
+            <h1>HUZEM İŞKUR Gençlik</h1>
+            <p>Tüm bağlantılar</p>
+        </header>
+        
+        <hr>
 
-        <a href="https://www.canva.com/design/DAG53zepSA8/MFd98lU1c8kl-2Hz3b-A2A/edit?utm_content=DAG53zepSA8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button muhendislik" target="_blank">Mühendislik Fakültesi Rapor</a>
+        <section id="pd-kilavuz-raporlar">
+            <h2>PD Kılavuz Hazırlama Raporları</h2>
+            <div class="links">
+                <a href="https://www.canva.com/design/DAG537TLWD0/eGVxiXdcnum31wps9BFz4g/edit?utm_content=DAG537TLWD0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button saglik" target="_blank">Sağlık Bilimleri Fakültesi Rapor</a>
 
-        <a href="https://www.canva.com/design/DAG531su9lQ/dUkRHN39P_tE-55MMJ1NBw/edit?utm_content=DAG531su9lQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button guzel-sanatlar" target="_blank">Güzel Sanatlar Fakültesi Rapor</a>
+                <a href="https://www.canva.com/design/DAG53zepSA8/MFd98lU1c8kl-2Hz3b-A2A/edit?utm_content=DAG53zepSA8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button muhendislik" target="_blank">Mühendislik Fakültesi Rapor</a>
 
-        <a href="https://www.canva.com/design/DAG53_wgXps/CCrx3QL_mItM1Jczy5zgdw/edit?utm_content=DAG53_wgXps&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button iktisad" target="_blank">İktisadi ve İdari Bilimler Fakültesi Rapor</a>
+                <a href="https://www.canva.com/design/DAG531su9lQ/dUkRHN39P_tE-55MMJ1NBw/edit?utm_content=DAG531su9lQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button guzel-sanatlar" target="_blank">Güzel Sanatlar Fakültesi Rapor</a>
 
-        <a href="https://www.canva.com/design/DAG53_UrVLk/dLtD1bNs9FUEigC8_GPNJw/edit?utm_content=DAG53_UrVLk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button fen-edebiyat" target="_blank">Fen Edebiyat Fakültesi Rapor</a>
+                <a href="https://www.canva.com/design/DAG53_wgXps/CCrx3QL_mItM1Jczy5zgdw/edit?utm_content=DAG53_wgXps&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button iktisad" target="_blank">İktisadi ve İdari Bilimler Fakültesi Rapor</a>
+
+                <a href="https://www.canva.com/design/DAG53_UrVLk/dLtD1bNs9FUEigC8_GPNJw/edit?utm_content=DAG53_UrVLk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="link-button fen-edebiyat" target="_blank">Fen Edebiyat Fakültesi Rapor</a>
+            </div>
+        </section>
+        
+        <!--
+        <section id="akademik-icerik">
+            <h2>Akademik İçerikler</h2>
+            <p>Buraya "Akademik" menüsü altındaki içerikleriniz gelecektir. Örneğin, Ders Planları, Önemli Tarihler, vb.</p>
+        </section>
+        
+        <section id="personel-bilgileri">
+            <h2>Personel Bilgileri</h2>
+            <p>Buraya "Personel" menüsü altındaki içerikleriniz gelecektir. Örneğin, İletişim Listeleri, İzin Formları, vb.</p>
+        </section>
+
     </div>
+-->
+    <footer>
+        <p>&copy; 2025 Üniversite Portalı</p>
+    </footer>
 
 </body>
 </html>
